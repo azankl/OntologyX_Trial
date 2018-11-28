@@ -1,0 +1,18 @@
+---
+title: "GO-Term Distance"
+
+---
+This plot shows the lack of higher level integration between GO terms related to bone dysplasias. FGFR3 mutations in Achondroplasia affect chondrocyte proliferation. CANT1 mutations in Desbuqouis Dysplasias affect Proteoglycan metabolism. Both processes could be considered to be part of Growth Plate Cartilage Morphogenesis and Cartilage Homeostasis and are therefore functionally related. They should be regarded as more functionally related than for example RANKL, which is involved in bone resorption. However the plot below shows that Chondrocyte proliferation, Proteoglycan Metabolism, Growthplate Cartilage Morphogenesis and Cartliage Homeostasis are not related in GO and cartilage homeostasis is actually closely related to bone resorption in the GO model. 
+```{r}
+library(ontologyIndex)
+library(ontologyPlot)
+library(ontologySimilarity)
+data(go)
+
+Chondrocyte_Proliferation <- "GO:0035988"
+Proteoglycan_Metabolism <- "GO:0006029"
+Growthplate_Cartilage_Morphogenesis <- "GO:0003422"
+Cartilage_Homeostasis <- "GO:1990079"
+Bone_Resorption <- "GO:0045453"
+onto_plot(go, terms=get_ancestors(go, c(Chondrocyte_Proliferation, Proteoglycan_Metabolism, Growthplate_Cartilage_Morphogenesis, Cartilage_Homeostasis, Bone_Resorption)))
+```

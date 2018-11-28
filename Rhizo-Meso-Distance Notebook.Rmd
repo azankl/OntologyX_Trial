@@ -1,0 +1,38 @@
+---
+title: "Rhizo-Meso Distance"
+output:
+  html_document:
+    df_print: paged
+---
+This plot shows that Rhizomelia is a child of Disproportionate Short Stature and also of Limb Undergrowth:
+```{r}
+library(ontologyIndex)
+library(ontologyPlot)
+library(ontologySimilarity)
+data(hpo)
+
+Rhizomelia <- "HP:0008905"
+Mesomelia <- "HP:0003027"
+Disproportionate_short_stature <- "HP:0003498"
+
+onto_plot(hpo, terms=get_ancestors(hpo, c(Disproportionate_short_stature, Rhizomelia)))
+```
+While this plot shows that Mesomelia is a child of Limb Undergrowth but not of Disproportionate Short Stature:
+```{r}
+onto_plot(hpo, terms=get_ancestors(hpo, c(Disproportionate_short_stature, Mesomelia)))
+```
+As a result, the semantic similarity between Rhizomelia and Disproportionate Short Stature is high:
+```{r}
+get_term_sim_mat(ontology = hpo,
+                 information_content = descendants_IC(hpo),
+                 row_terms = Disproportionate_short_stature,
+                 col_terms = Rhizomelia)
+```
+but the semantic similarity between Mesomelia and Disproportionate Short Stature is low:
+```{r}
+get_term_sim_mat(ontology = hpo,
+                 information_content = descendants_IC(hpo),
+                 row_terms = Disproportionate_short_stature,
+                 col_terms = Mesomelia)
+```
+
