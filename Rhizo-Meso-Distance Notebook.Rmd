@@ -6,6 +6,7 @@ output:
 ---
 This plot shows that Rhizomelia is a child of Disproportionate Short Stature and also of Limb Undergrowth:
 ```{r}
+BiocManager::install("Rgraphviz")
 library(ontologyIndex)
 library(ontologyPlot)
 library(ontologySimilarity)
@@ -34,5 +35,10 @@ get_term_sim_mat(ontology = hpo,
                  information_content = descendants_IC(hpo),
                  row_terms = Disproportionate_short_stature,
                  col_terms = Mesomelia)
+```
+
+On the other hand, as rhizo and mesomelia are linked through Limb Undergrowth, the similarity between rhizo and mesomelia is still high, so dont use that as an example.
+```{r}
+onto_plot(hpo, terms=get_ancestors(hpo, c(Rhizomelia, Mesomelia)))
 ```
 
